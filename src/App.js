@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Main from './Components/Main';
+import { MemoryRouter } from 'react-router-dom';
+import ErrorBoundary from './Components/ErrorBoundary'
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom"
+import "./App.css"
+import Home from "./Components/Home"
+import LogInSignUP from './Components/LogInSignUP';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    render() {
+        return (
+            <React.Fragment>
+                <Router>
+                    <Switch>
+                      <Route path="/">
+                        <div className="dashboard">
+                          <ErrorBoundary>
+                            <MemoryRouter
+                              initialEntries={["/"]}
+                              initialIndex={1}
+                            >
+                              <Main />
+                            </MemoryRouter>
+                          </ErrorBoundary>
+                        </div>
+                      </Route>
+                    </Switch>
+                </Router>
+            </React.Fragment>
+        );
+    }
 }
 
 export default App;
