@@ -9,7 +9,7 @@ const JobApplications = props => {
 
     const getData = () => {
         setLoader(true)
-        const url = `/recruiters/jobs/${props.id}/candidates`
+        const url = `https://jobs-api.squareboat.info/api/v1/recruiters/jobs/${props.id}/candidates`
         fetch(url, {
             method: "GET",
             headers: {

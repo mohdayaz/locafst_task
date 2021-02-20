@@ -34,7 +34,7 @@ class JobsContainer extends Component {
 
     getData(page) {
         this.setState({loader: true, currentPage: page})
-        const url = this.props.endPoint + "?page=" + page
+        const url = "https://jobs-api.squareboat.info/api/v1" + this.props.endPoint + "?page=" + page
         fetch(url, {
             method: "GET",
             headers: {"Authorization": localStorage.getItem("token")}
@@ -70,7 +70,7 @@ class JobsContainer extends Component {
 
     applyJob(id) {
         this.setState({loader: true})
-        const url = "/candidates/jobs"
+        const url = "https://jobs-api.squareboat.info/api/v1/candidates/jobs"
         fetch(url, {
             method: "POST",
             headers: {"Authorization": localStorage.getItem("token"), "content-type": "application/json"},

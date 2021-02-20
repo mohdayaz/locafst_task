@@ -24,7 +24,7 @@ class Login extends Component {
         const valueChecked = true
         const {email, password} = this.state
         if(valueChecked) {
-            const url = "/auth/login/"
+            const url = "https://jobs-api.squareboat.info/api/v1/auth/login/"
             const data_to_send = {
                 email,password
             }

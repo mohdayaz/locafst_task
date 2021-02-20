@@ -19,7 +19,7 @@ class PostJob extends Component {
 
     createJob() {
         this.setState({loader: true})
-        const url = `/jobs/`
+        const url = `https://jobs-api.squareboat.info/api/v1/jobs/`
         const data_to_send = {
             title: this.state.jobTitle,
             description: this.state.jobDescription,

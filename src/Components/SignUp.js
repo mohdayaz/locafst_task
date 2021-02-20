@@ -23,7 +23,7 @@ class SignUp extends Component {
         const skillsArray = skills.map(e => e + ",")
         const skillsString = skillsArray.toString()
         if(valueChecked) {
-            const url = "/auth/register"
+            const url = "https://jobs-api.squareboat.info/api/v1/auth/register"
             const data_to_send = {
                 email,
                 userRole: type === "recruiter" ? 0 : 1,
