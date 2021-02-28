@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-import SideBar from "./components/SideBar"
-import NavBar from "./components/Navbar"
-import Home from "./components/Home"
+import SideBar from "./Components/SideBar"
+import NavBar from "./Components/Navbar"
+import Home from "./Components/Home"
 
 function App() {
   return (
