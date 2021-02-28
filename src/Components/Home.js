@@ -1,49 +1,70 @@
-import Navbar from "./Navbar"
-import {Link} from "react-router-dom"
+import React , {Component} from "react"
+import data from "./data"
+import Modal from "./Modal"
+import MaterialDetails from "./MaterialDetails"
 
-const Home = () => {
-    const image = "http://assets.stickpng.com/images/580b57fcd9996e24bc43c51f.png"
-    return (<div className="home">
-        <Navbar showLoginButton={true} />
-        <div className="home-inner">
-            <div className="top-content">
-                <h2>Welcome to</h2>
-                <p >My<span>JOb</span></p>
-                <Link to="/login"><button>Get Started</button></Link>
-            </div>
-            <div className="content-image">
-                <img src="http://www.apimages.com/Images/Creative_Stock_T_3.jpg"/>
-            </div>
-            <div className="home-card-container">
-                <p>Why us</p>
-                <div className="card">
-                    <div className="title">Get more visibility</div>
-                    <div className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</div>
+class Home extends React.Component {
+
+    constructor () {
+        super()
+        this.state = {
+            showColor: false,
+            showModal: false
+        }
+    }
+
+    onCardFocus(i) {
+        this.setState({
+            ["showColor" + i]: true
+        })
+    }
+
+    cardFocusLeave(i) {
+        this.setState({
+            ["showColor" + i]: false
+        })
+    }
+
+    getSelectedCrad(i) {
+        this.setState({cardData: data.cardData[i]}, () => this.setState({showModal: true}))
+    }
+
+    closeModal() {
+        this.setState({showModal: false})
+    }
+
+    render() {
+
+        return (
+            <div className="home">
+                <div className="fabric-card-container" >
+                    {data.cardData.map((e,index) => <div 
+                        className="card" 
+                        onMouseLeave={() => this.cardFocusLeave(index)} 
+                        onMouseEnter={() => this.onCardFocus(index)}
+                        onClick={() => this.getSelectedCrad(index)}
+                    >
+                        <div className="image">
+                            <img src={e.image}/>
+                        </div>
+                        <div className="card-content">
+                            <p className="title">{e.title}</p>
+                            {this.state[`showColor${index}`] ? 
+                                <div className="colors-container">
+                                    {e.colors.map((color, i) => i < 6 && <div className="color" style={{background: color}}></div>)}
+                                    {e.colors.length > 6 && <div>+ {e.colors.length - 6}</div>}
+                                </div>
+                            :
+                                <p className="color-count">{e.colors.length} colors</p>
+                            }
+                        </div>
+                    </div>)}
                 </div>
-                <div className="card">
-                    <div className="title">Get more visibility</div>
-                    <div className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</div>
-                </div>
-                <div className="card">
-                    <div className="title">Get more visibility</div>
-                    <div className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</div>
-                </div>
+                {this.state.showModal && <Modal closeModal={() => this.closeModal()} title="Material details" component={<MaterialDetails data={this.state.cardData}/>}/>}
             </div>
-            <div className="client-container">
-                <p>companies who trust us</p>
-                <img src={image}/>
-                <img src={image}/>
-                <img src={image}/>
-                <img src={image}/>
-                <img src={image}/>
-                <img src={image}/>
-                <img src={image}/>
-                <img src={image}/>
-                <img src={image}/>
-                <img src={image}/>
-            </div>
-        </div>
-    </div>)
+        ) 
+    }
+
 }
 
 export default Home

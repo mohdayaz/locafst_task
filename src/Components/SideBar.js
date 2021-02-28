@@ -1,7 +1,7 @@
-const Navbar = props => {
+const SideBar = props => {
 
     return (
-        <div className="navbar">
+        <div className="sidebar">
             <ul>
                 <li></li>
             </ul>
@@ -10,4 +10,4 @@ const Navbar = props => {
 
 }
 
-export default Navbar
+export default SideBar
